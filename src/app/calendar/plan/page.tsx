@@ -1,9 +1,11 @@
 import PlannerIndex from '@/component/plan';
 
-export default function Home() {
+const Plan = () => {
 	return (
 		<div className="p-10">
 			<PlannerIndex />
 		</div>
 	);
-}
+};
+
+export default Plan;

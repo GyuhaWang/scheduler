@@ -1,0 +1,136 @@
+.running {
+	--color: black;
+	--duration: 0.7s;
+	--size: 0.5;
+	.outer {
+		animation: outer var(--duration) linear infinite;
+		.body {
+			background: var(--color);
+			height: calc(15px * var(--size));
+			width: calc(8px * var(--size));
+			border-radius: 4px;
+			transform-origin: calc(4px * var(--size)) calc(11px * var(--size));
+			position: relative;
+			transform: rotate(32deg);
+			animation: body var(--duration) linear infinite;
+			&:before {
+				content: '';
+				width: calc(8px * var(--size));
+				height: calc(8px * var(--size));
+				border-radius: 4px;
+				bottom: calc(16px * var(--size));
+				left: 0;
+				position: absolute;
+				background: var(--color);
+			}
+			.arm,
+			.arm:before,
+			.leg,
+			.leg:before {
+				content: '';
+				width: var(--w, calc(11px * var(--size)));
+				height: calc(4px * var(--size));
+				top: var(--t, 0);
+				left: var(--l, calc(2px * var(--size)));
+				border-radius: 2px;
+				transform-origin: calc(2px * var(--size)) calc(2px * var(--size));
+				position: absolute;
+				background: var(--c, var(--color));
+				transform: rotate(var(--r, 0deg));
+				animation: var(--name, arm-leg) var(--duration) linear infinite;
+			}
+			.arm {
+				&:before {
+					--l: calc(7px * var(--size));
+					--name: arm-b;
+				}
+				&.front {
+					--r: 24deg;
+					--r-to: 164deg;
+					&:before {
+						--r: -48deg;
+						--r-to: -36deg;
+					}
+				}
+				&.behind {
+					--r: 164deg;
+					--r-to: 24deg;
+					&:before {
+						--r: -36deg;
+						--r-to: -48deg;
+					}
+				}
+			}
+			.leg {
+				--w: calc(12px * var(--size));
+				--t: calc(12px * var(--size));
+				&:before {
+					--t: 0;
+					--l: calc(8px * var(--size));
+				}
+				&.front {
+					--r: 10deg;
+					--r-to: 108deg;
+					&:before {
+						--r: 18deg;
+						--r-to: 76deg;
+					}
+				}
+				&.behind {
+					--r: 108deg;
+					--r-to: 10deg;
+					--c: none;
+					&:before {
+						--c: var(--color);
+						--r: 76deg;
+						--r-to: 18deg;
+					}
+					&:after {
+						content: '';
+						top: 0;
+						right: 0;
+						height: calc(4px * var(--size));
+						width: calc(6px * var(--size));
+						clip-path: polygon(2px 0, 6px 0, 6px 4px, 0 4px);
+						border-radius: 0 2px 2px 0;
+						position: absolute;
+						background: var(--color);
+					}
+				}
+			}
+		}
+	}
+}
+
+@keyframes outer {
+	50% {
+		transform: translateY(0);
+	}
+	25%,
+	75% {
+		transform: translateY(4px);
+	}
+}
+
+@keyframes body {
+	50% {
+		transform: rotate(16deg);
+	}
+	25%,
+	75% {
+		transform: rotate(24deg);
+	}
+}
+
+@keyframes arm-leg {
+	50% {
+		transform: rotate(var(--r-to));
+	}
+}
+
+@keyframes arm-b {
+	30%,
+	70% {
+		transform: rotate(var(--r-to));
+	}
+}
