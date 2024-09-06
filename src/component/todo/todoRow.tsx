@@ -6,6 +6,8 @@ import { DragEvent } from 'react';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import SaveIcon from '@mui/icons-material/Save';
+import EditNoteIcon from '@mui/icons-material/EditNote';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 const TodoRow = ({
 	item,
 	onDragStart,
@@ -32,29 +34,39 @@ const TodoRow = ({
 	const inteoutRef = useRef<NodeJS.Timeout | null>(null);
 	const TodoDiv = useMemo(() => {
 		return !editable ? (
-			<div className="flex grow justify-between  items-start ">
-				<div
-					className="flex break-all break-words font-xs 
+			<div className="flex flex-col w-full">
+				<div className="flex grow justify-between  items-start ">
+					<div
+						className="flex break-all break-words font-xs 
 				 ">
-					{item.title}
+						{item.title}
+					</div>
+					<div className="flex   items-center gap-2">
+						<button
+							className="text-xs  font-bold text-nowrap"
+							onClick={() => setEditable(true)}>
+							<EditIcon
+								fontSize="small"
+								className="text-gray-500"
+							/>
+						</button>
+						<button
+							className="text-xs  font-bold text-nowrap"
+							onClick={() => onClickremove(item.id)}>
+							<DeleteOutlineIcon
+								fontSize="small"
+								className="text-red-500"
+							/>
+						</button>
+					</div>
 				</div>
-				<div className="flex   items-center gap-2">
-					<button
-						className="text-xs  font-bold text-nowrap"
-						onClick={() => setEditable(true)}>
-						<EditIcon
-							fontSize="small"
-							className="text-gray-500"
-						/>
-					</button>
-					<button
-						className="text-xs  font-bold text-nowrap"
-						onClick={() => onClickremove(item.id)}>
-						<DeleteOutlineIcon
-							fontSize="small"
-							className="text-red-500"
-						/>
-					</button>
+				<div className="flex items-end justify-start gap-1">
+					{item.date && (
+						<CalendarMonthIcon style={{ fontSize: '10px', color: 'gray' }} />
+					)}
+					{item.content && (
+						<EditNoteIcon style={{ fontSize: '10px', color: 'gray' }} />
+					)}
 				</div>
 			</div>
 		) : (
@@ -125,7 +137,7 @@ const TodoRow = ({
 				<div
 					onMouseDown={(e) => onMouseDown()}
 					onMouseUp={(e) => onMouseUp()}
-					className="p-2 w-full flex  justify-between text-black text-sm active:scale-[0.99] transition-all"
+					className="p-1 w-full flex  justify-between text-black text-sm active:scale-[0.99] transition-all"
 					onDragStart={(e) => onDragStart(e, index)}
 					onDragEnter={(e) => onDragEnter(e, index)}
 					onDragOver={onDragOver}

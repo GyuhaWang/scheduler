@@ -24,6 +24,9 @@ const Todos = ({
 	removeMemo,
 	removeTodo,
 	updateTodo,
+	setStartTime,
+	setEndTime,
+	onChangeMemoInput,
 }: {
 	todos: Todo[];
 	inputValue: string;
@@ -40,6 +43,9 @@ const Todos = ({
 	removeMemo: () => void;
 	removeTodo: (id: string) => void;
 	updateTodo: (todoId: string, text: string) => void;
+	setStartTime: (time: string) => void;
+	setEndTime: (time: string) => void;
+	onChangeMemoInput: (e: ChangeEvent<HTMLTextAreaElement>) => void;
 }) => {
 	const maxTodoLength = 10;
 	const draggingItemIndex = useRef<number | null>(null);
@@ -81,21 +87,28 @@ const Todos = ({
 		// e.preventDefault();
 	};
 	const dateRow = useMemo(() => {
-		return currentTodo?.date ? (
+		const startTime = currentTodo?.date?.getStartTime();
+		const endTime = currentTodo?.date?.getEndTime();
+
+		return (
 			<AddDateRow
-				date={currentTodo.date}
+				startTime={startTime}
+				endTime={endTime}
 				removeDate={removeDate}
+				setStartTime={setStartTime}
+				setEndTime={setEndTime}
 			/>
-		) : null;
-	}, [currentTodo?.date]);
+		);
+	}, [currentTodo]);
 	const memoRow = useMemo(() => {
-		return currentTodo?.content ? (
+		return (
 			<AddMemoRow
-				memo={currentTodo.content}
+				memo={currentTodo?.content}
+				onChangeMemoInput={onChangeMemoInput}
 				removeMemo={removeMemo}
 			/>
-		) : null;
-	}, [currentTodo?.content]);
+		);
+	}, [currentTodo]);
 	const invalidRow = useMemo(() => {
 		return (
 			isInvalid && <p className="text-xs px-4 text-red-500">{invalidMessage}</p>
@@ -103,7 +116,7 @@ const Todos = ({
 	}, [isInvalid, invalidMessage]);
 	return (
 		<section className="flex flex-col gap-6">
-			<div className="w-full flex flex-col gap-1">
+			<div className="w-full flex flex-col gap-3">
 				{/* <div>
 					<button onClick={() => useFilter('doneLast')}>
 						필터 버튼입니다.
@@ -133,9 +146,10 @@ const Todos = ({
 						/>
 					</label>
 				</form>
-				{invalidRow}
 				{dateRow}
 				{memoRow}
+				{invalidRow}
+
 				{isOptionalInputNow && (
 					<div className="text-xs px-4 text-gray-500">
 						@t 는 시간을, @m은 memo를 추가 가능

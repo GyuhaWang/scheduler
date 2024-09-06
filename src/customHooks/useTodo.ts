@@ -1,6 +1,6 @@
 import { Todo, TodoTime } from '@/@types/todo';
 import { planColors } from '@/variables/color';
-import { Preview } from '@mui/icons-material';
+
 import {
 	ChangeEvent,
 	useCallback,
@@ -29,26 +29,9 @@ const useTodo = () => {
 		if (date) {
 			const stringDate = date.map((match) => match.slice(2, -1)).toString();
 			const splitTime = stringDate.split('-');
-			const todayStartObj = new Date();
-			const todayEndObj = new Date();
-			if (splitTime.length == 2 || splitTime.length == 1) {
-				//s,e 모두 존재
-				const [sh, sm] = splitTime[0].split(':').map((st) => parseInt(st));
-				const [eh, em] =
-					splitTime.length == 2
-						? splitTime[1].split(':').map((st) => parseInt(st))
-						: [sh + 1, sm];
-				todayStartObj.setHours(sh);
-				todayStartObj.setMinutes(sm);
-				todayEndObj.setHours(eh);
-				todayEndObj.setMinutes(em);
-				if (todayStartObj > todayEndObj) {
-					_triggerInvalid('종료시간이 시작시간보다 빠릅니다!');
-					return;
-				}
-				const newDate: TodoTime = new TodoTime(todayStartObj, todayEndObj);
 
-				setCurentTodo((prev) => ({ ...prev!, ...{ date: newDate } }));
+			if (splitTime.length == 2 || splitTime.length == 1) {
+				setTime(splitTime[0], splitTime.length == 2 ? splitTime[1] : null);
 			}
 
 			const dateText = value.replace(/@t[^\/]*\//g, '');
@@ -75,6 +58,7 @@ const useTodo = () => {
 			setInvalidMessage(undefined);
 		}, 1000);
 	}, []);
+
 	//
 	useEffect(() => {
 		if (currentTodo == undefined) {
@@ -91,6 +75,60 @@ const useTodo = () => {
 		}
 	}, [inputValue]);
 	//
+	const setStartTime = (time: string) => {
+		const todayStartObj = new Date();
+		const todayEndObj = new Date();
+		const [sh, sm] = time.split(':').map((st) => parseInt(st));
+		const [eh, em] = [sh + 1, sm];
+		todayStartObj.setHours(sh);
+		todayStartObj.setMinutes(sm);
+		todayEndObj.setHours(eh);
+		todayEndObj.setMinutes(em);
+		if (todayStartObj > todayEndObj) {
+			_triggerInvalid('종료시간이 시작시간보다 빠릅니다!');
+			return;
+		}
+		const newDate: TodoTime = new TodoTime(todayStartObj, todayEndObj);
+
+		setCurentTodo((prev) => ({ ...prev!, ...{ date: newDate } }));
+	};
+	const setEndTime = (time: string) => {
+		const todayEndObj = new Date();
+		const [eh, em] = time.split(':').map((st) => parseInt(st));
+
+		todayEndObj.setHours(eh);
+		todayEndObj.setMinutes(em);
+		const todayStartObj = currentTodo?.date?.startTime;
+		if (!todayStartObj || todayStartObj > todayEndObj) {
+			_triggerInvalid('종료시간이 시작시간보다 빠릅니다!');
+			return;
+		}
+		const newDate: TodoTime = new TodoTime(todayStartObj, todayEndObj);
+
+		setCurentTodo((prev) => ({ ...prev!, ...{ date: newDate } }));
+	};
+	const setTime = (startTime: string, endTime: string | null) => {
+		const todayStartObj = new Date();
+		const todayEndObj = new Date();
+		const [sh, sm] = startTime.split(':').map((st) => parseInt(st));
+		const [eh, em] = endTime
+			? endTime.split(':').map((st) => parseInt(st))
+			: [sh + 1, sm];
+		todayStartObj.setHours(sh);
+		todayStartObj.setMinutes(sm);
+		todayEndObj.setHours(eh);
+		todayEndObj.setMinutes(em);
+		if (todayStartObj > todayEndObj) {
+			_triggerInvalid('종료시간이 시작시간보다 빠릅니다!');
+			return;
+		}
+		const newDate: TodoTime = new TodoTime(todayStartObj, todayEndObj);
+
+		setCurentTodo((prev) => ({ ...prev!, ...{ date: newDate } }));
+	};
+	const onChangeMemoInput = (e: ChangeEvent<HTMLTextAreaElement>) => {
+		setCurentTodo((prev) => ({ ...prev!, ...{ content: e.target.value } }));
+	};
 	const onChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
 		const value = e.target.value;
 
@@ -241,6 +279,10 @@ const useTodo = () => {
 		removeTodo,
 		removeDate,
 		removeMemo,
+		setTime,
+		setStartTime,
+		setEndTime,
+		onChangeMemoInput,
 	};
 };
 

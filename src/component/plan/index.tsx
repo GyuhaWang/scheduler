@@ -22,6 +22,9 @@ const PlannerIndex = () => {
 		removeTodo,
 		removeDate,
 		removeMemo,
+		setStartTime,
+		setEndTime,
+		onChangeMemoInput,
 	} = useTodo();
 	return (
 		<div className="flex flex-col sm:flex-row gap-4 ">
@@ -42,6 +45,9 @@ const PlannerIndex = () => {
 					removeMemo={removeMemo}
 					removeTodo={removeTodo}
 					updateTodo={updateTodo}
+					setStartTime={setStartTime}
+					setEndTime={setEndTime}
+					onChangeMemoInput={onChangeMemoInput}
 				/>
 			</div>
 
