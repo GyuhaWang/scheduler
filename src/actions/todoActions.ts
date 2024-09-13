@@ -1,4 +1,4 @@
-import { Todo, TodoModule } from '@/@types/todo';
+import { Todo } from '@/@types/todo';
 
 export const getTodo = async (): Promise<Todo[]> => {
 	try {
@@ -10,10 +10,10 @@ export const getTodo = async (): Promise<Todo[]> => {
 		if (resJson['success']) {
 			return resJson['data'];
 		} else {
-			throw Error;
+			return [];
 		}
 	} catch (e) {
-		throw Error;
+		return [];
 	}
 };
 

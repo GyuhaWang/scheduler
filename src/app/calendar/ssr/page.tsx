@@ -3,7 +3,7 @@ import Read from '@/component/read_ssr';
 import { SsrTag } from '@/component/rendering_tag';
 import { Suspense } from 'react';
 
-export default async function Page() {
+const SSR = async () => {
 	return (
 		<main className="border-black border-2 w-full h-full">
 			<SsrTag />
@@ -18,4 +18,6 @@ export default async function Page() {
 			</div>
 		</main>
 	);
-}
+};
+
+export default SSR;

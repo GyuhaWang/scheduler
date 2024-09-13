@@ -2,11 +2,11 @@
 
 import useTodo from '@/customHooks/useTodo';
 import Todos from '../todo/todoColumn';
-import { fetchTodosFromDB } from '../../app/calendar/action';
+
 const TodoIndex = () => {
 	const {
 		todos,
-		plans,
+
 		inputValue,
 		isOptionalInputNow,
 		isInvalid,
@@ -24,7 +24,7 @@ const TodoIndex = () => {
 		setStartTime,
 		setEndTime,
 		onChangeMemoInput,
-	} = useTodo(fetchTodosFromDB);
+	} = useTodo();
 	return (
 		<div className="flex flex-col sm:flex-row gap-4 ">
 			<div className=" felx w-full flex-col ">

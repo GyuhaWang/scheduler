@@ -1,9 +1,9 @@
 import { getTodo } from '@/actions/todoActions';
 import Create from '@/component/create_csr';
 import Read from '@/component/read_csr';
-
 import { SsrTag } from '@/component/rendering_tag';
-export default async function Page() {
+
+const CSR = async () => {
 	const initialData = await getTodo();
 
 	return (
@@ -18,4 +18,6 @@ export default async function Page() {
 			</div>
 		</main>
 	);
-}
+};
+
+export default CSR;

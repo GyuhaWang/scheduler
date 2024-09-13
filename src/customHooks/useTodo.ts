@@ -11,13 +11,11 @@ import {
 } from 'react';
 import uuid from 'react-uuid';
 
-const useTodo = (initialData: TodoModule[]) => {
-	const [todos, setTodos] = useState<TodoModule[]>(initialData);
+const useTodo = () => {
+	const [todos, setTodos] = useState<TodoModule[]>([]);
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState<string | undefined>();
-	const plans: TodoModule[] = useMemo(() => {
-		return todos.filter(({ date }) => date != null);
-	}, [todos]);
+
 	const [inputValue, setInputValue] = useState('');
 	const [currentTodo, setCurentTodo] = useState<TodoModule>();
 	const [isOptionalInputNow, setIsOptionalInputNow] = useState(false);
@@ -267,7 +265,7 @@ const useTodo = (initialData: TodoModule[]) => {
 	};
 	return {
 		todos,
-		plans,
+
 		inputValue,
 		isOptionalInputNow,
 		isInvalid,

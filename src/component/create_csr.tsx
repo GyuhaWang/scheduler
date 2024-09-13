@@ -3,11 +3,10 @@ import { Todo } from '@/@types/todo';
 import { createTodo } from '@/actions/todoActions';
 
 import useTodoStore from '@/zustand/useTodoStore';
-import { revalidatePath } from 'next/cache';
 import { useRouter } from 'next/navigation';
 import { ChangeEvent, useState } from 'react';
 
-import { CsrTag, SsrTag } from './rendering_tag';
+import { CsrTag } from './rendering_tag';
 const initialTodo: Todo = {
 	user_id: '792d073c-d7f4-44bf-b6c3-ea0ae8c462da',
 	title: '',
