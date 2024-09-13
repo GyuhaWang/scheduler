@@ -2,7 +2,7 @@ import { Todo } from '@/@types/todo';
 
 export const getTodo = async (): Promise<Todo[]> => {
 	try {
-		const res = await fetch(`http://localhost:3000/api/todos`, {
+		const res = await fetch(`${process.env.BASE_URL}/api/todos`, {
 			method: 'GET',
 			cache: 'no-cache',
 		});
@@ -19,7 +19,7 @@ export const getTodo = async (): Promise<Todo[]> => {
 
 export const createTodo = async (data: Todo): Promise<Todo> => {
 	try {
-		const res = await fetch(`http://localhost:3000/api/todos`, {
+		const res = await fetch(`${process.env.BASE_URL}/api/todos`, {
 			method: 'POST',
 			body: JSON.stringify(data),
 		});
@@ -37,7 +37,7 @@ export const createTodo = async (data: Todo): Promise<Todo> => {
 
 export const deleteTodo = async (todoId: number) => {
 	try {
-		const res = await fetch(`http://localhost:3000/api/todos`, {
+		const res = await fetch(`${process.env.BASE_URL}/api/todos`, {
 			method: 'DELETE',
 			body: JSON.stringify({ id: todoId }),
 		});
@@ -52,7 +52,7 @@ export const deleteTodo = async (todoId: number) => {
 };
 export const updateTodo = async (todo: Todo) => {
 	try {
-		const res = await fetch(`http://localhost:3000/api/todos`, {
+		const res = await fetch(`${process.env.BASE_URL}api/todos`, {
 			method: 'PUT',
 			body: JSON.stringify(todo),
 		});
