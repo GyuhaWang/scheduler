@@ -1,4 +1,26 @@
+//      id SERIAL PRIMARY KEY,
+// 		user_id UUID NOT NULL,
+// 		title VARCHAR(255) NOT NULL,
+// 		content VARCHAR(255),
+// 		startDate TIMESTAMP,
+// 		endDate TIMESTAMP,
+// 		colorIndex SMALLINT,
+// 		isDone BOOLEAN NOT NULL DEFAULT FALSE,
+// 		"createdAt" TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+// 		CONSTRAINT fk_user_id FOREIGN KEY(user_id) REFERENCES "users"(id) ON DELETE CASCADE ON UPDATE CASCADE
 export interface Todo {
+	id?: number;
+	user_id: string;
+	title: string;
+	content: string;
+	startdate: string | null;
+	enddate: string | null;
+	colorIndex: number | null;
+	isdone?: boolean;
+	createdAt?: Date;
+}
+
+export interface TodoModule {
 	id: string;
 	title: string;
 	content: string | null;

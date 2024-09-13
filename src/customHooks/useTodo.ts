@@ -1,4 +1,4 @@
-import { Todo, TodoTime } from '@/@types/todo';
+import { TodoModule, TodoTime } from '@/@types/todo';
 import { planColors } from '@/variables/color';
 
 import {
@@ -11,17 +11,20 @@ import {
 } from 'react';
 import uuid from 'react-uuid';
 
-const useTodo = () => {
-	const [todos, setTodos] = useState<Todo[]>([]);
-	const plans: Todo[] = useMemo(() => {
+const useTodo = (initialData: TodoModule[]) => {
+	const [todos, setTodos] = useState<TodoModule[]>(initialData);
+	const [loading, setLoading] = useState(false);
+	const [error, setError] = useState<string | undefined>();
+	const plans: TodoModule[] = useMemo(() => {
 		return todos.filter(({ date }) => date != null);
 	}, [todos]);
 	const [inputValue, setInputValue] = useState('');
-	const [currentTodo, setCurentTodo] = useState<Todo>();
+	const [currentTodo, setCurentTodo] = useState<TodoModule>();
 	const [isOptionalInputNow, setIsOptionalInputNow] = useState(false);
 	const [isInvalid, setIsInvalid] = useState(false);
 	const [invalidMessage, setInvalidMessage] = useState<string>();
 	const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
 	//
 	const _addDate = (value: string) => {
 		const date = value.match(/@t[^\/]*\//g);
@@ -184,7 +187,7 @@ const useTodo = () => {
 	};
 	const updateTodo = (todoId: string, text: string) => {
 		let tmpIndex = -1;
-		const tmp: Todo | undefined = todos.find(({ id }, index) => {
+		const tmp: TodoModule | undefined = todos.find(({ id }, index) => {
 			if (id == todoId) {
 				tmpIndex = index;
 			}
@@ -198,7 +201,7 @@ const useTodo = () => {
 			setTodos(tmpArr);
 		}
 	};
-	const setTodo = (todoList: Todo[]) => {
+	const setTodo = (todoList: TodoModule[]) => {
 		setTodos(todoList);
 	};
 
@@ -227,7 +230,7 @@ const useTodo = () => {
 	};
 	const onClickCheck = (todoId: string) => {
 		let todoIndex = -1;
-		const todo: Todo | undefined = todos.find(({ id }, index) => {
+		const todo: TodoModule | undefined = todos.find(({ id }, index) => {
 			if (id == todoId) {
 				todoIndex = index;
 			}

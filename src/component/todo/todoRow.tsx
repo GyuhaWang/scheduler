@@ -1,6 +1,6 @@
 'use client';
 
-import { Todo } from '@/@types/todo';
+import { TodoModule } from '@/@types/todo';
 import { useMemo, useRef, useState } from 'react';
 import { DragEvent } from 'react';
 import EditIcon from '@mui/icons-material/Edit';
@@ -19,7 +19,7 @@ const TodoRow = ({
 	onClickUpdate,
 	onClickremove,
 }: {
-	item: Todo;
+	item: TodoModule;
 	onDragStart: (e: DragEvent<HTMLDivElement>, index: number) => void;
 	onDragEnter: (e: DragEvent<HTMLDivElement>, index: number) => void;
 	onDragOver: (e: DragEvent<HTMLDivElement>) => void;

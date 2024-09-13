@@ -1,6 +1,6 @@
 'use client';
 
-import { Todo } from '@/@types/todo';
+import { TodoModule } from '@/@types/todo';
 import { PlannerTime } from '@/data/planner';
 import { useMemo } from 'react';
 import CurrentTime from './currentTimeLine';
@@ -8,7 +8,7 @@ import CurrentTime from './currentTimeLine';
 import DateRow from './dateRow';
 import PlanBox from './planBox';
 
-const Planner = ({ todos }: { todos: Todo[] }) => {
+const Planner = ({ todos }: { todos: TodoModule[] }) => {
 	const dateRow = useMemo(() => {
 		return PlannerTime.map((val, index) => (
 			<DateRow

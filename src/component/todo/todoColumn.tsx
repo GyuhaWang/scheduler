@@ -7,7 +7,7 @@ import TodoRow from './todoRow';
 import TodoInput from './todoInput';
 import AddDateRow from './addDateRow';
 import AddMemoRow from './addMemoRow';
-import { Todo } from '@/@types/todo';
+import { TodoModule } from '@/@types/todo';
 const Todos = ({
 	todos,
 	inputValue,
@@ -28,13 +28,13 @@ const Todos = ({
 	setEndTime,
 	onChangeMemoInput,
 }: {
-	todos: Todo[];
+	todos: TodoModule[];
 	inputValue: string;
 	isOptionalInputNow: boolean;
-	currentTodo: Todo | undefined;
+	currentTodo: TodoModule | undefined;
 	isInvalid: boolean;
 	invalidMessage: string | undefined;
-	setTodo: (todoList: Todo[]) => void;
+	setTodo: (todoList: TodoModule[]) => void;
 	onChangeInput: (e: ChangeEvent<HTMLInputElement>) => void;
 	addTodo: () => void;
 	onClickCheck: (todoId: string) => void;

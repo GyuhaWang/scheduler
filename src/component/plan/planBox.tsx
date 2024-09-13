@@ -1,4 +1,4 @@
-import { Todo } from '@/@types/todo';
+import { TodoModule } from '@/@types/todo';
 import {
 	planBorderColors,
 	planColors,
@@ -6,7 +6,7 @@ import {
 } from '@/variables/color';
 import { useCallback, useMemo } from 'react';
 
-const PlanBox = ({ plan }: { plan: Todo }) => {
+const PlanBox = ({ plan }: { plan: TodoModule }) => {
 	const getRandomColor = useCallback(() => {
 		return [
 			`${planColors[plan.colorIndex]} ${planBorderColors[plan.colorIndex]}`,

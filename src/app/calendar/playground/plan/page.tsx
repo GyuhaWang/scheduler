@@ -1,9 +1,12 @@
 import PlannerIndex from '@/component/plan';
+import { Suspense } from 'react';
 
 const Plan = () => {
 	return (
 		<div className="p-10">
-			<PlannerIndex />
+			<Suspense>
+				<PlannerIndex />
+			</Suspense>
 		</div>
 	);
 };
