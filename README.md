@@ -1,4 +1,5 @@
-server side rendering, client side rendering 을 이용한 TODO APP
+## Description
+<h3>server side rendering, client side rendering 을 이용한 TODO APP</h3>
 
 ## DOMAIN URL
 <a href='https://scheduler-dun-three.vercel.app/'>TODO APP<a/>
@@ -10,15 +11,15 @@ server side rendering, client side rendering 을 이용한 TODO APP
 </ul>
 
 ## 개발 스택
-<h2>front-end</h2>
+<h3>front-end</h3>
 <ul>
   <li>next.js, tailwind css, zustand</li>
 </ul>
-<h2>back-end</h2>
+<h3>back-end</h3>
 <ul>
   <li>next.js api,postgres</li>
 </ul>
-<h2> deploy, storage</h2>
+<h3> deploy, storage</h3>
 <ul>
   <li>vercel deploy</li>
   <li>vercel storage</li>
