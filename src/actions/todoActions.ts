@@ -52,7 +52,7 @@ export const deleteTodo = async (todoId: number) => {
 };
 export const updateTodo = async (todo: Todo) => {
 	try {
-		const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}api/todos`, {
+		const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/todos`, {
 			method: 'PUT',
 			body: JSON.stringify(todo),
 		});

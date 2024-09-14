@@ -47,7 +47,7 @@ export async function DELETE(req: NextRequest, res: NextResponse) {
 		const res = await client.sql`
 		    DELETE FROM todos WHERE id=${id}
 		    `;
-		console.log('API', id, res);
+
 		return NextResponse.json({ success: true, message: 'deleted' });
 	} catch (e) {
 		// 에러 처리
@@ -70,7 +70,7 @@ export async function PUT(req: NextRequest, res: NextResponse) {
 			isdone,
 			createdAt,
 		} = await req.json();
-		console.log('@@@api update', id, isdone);
+
 		const res = await client.sql`
 		    UPDATE todos SET isdone=${isdone} WHERE id=${id}
 		    `;

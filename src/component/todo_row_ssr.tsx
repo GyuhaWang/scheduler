@@ -17,7 +17,6 @@ export async function TodoRow({ data }: { data: Todo }) {
 	async function habdleSubmitUpdate(e: FormData) {
 		'use server';
 		if (data.id) {
-			console.log('clicked');
 			await updateTodo({ ...data, isdone: !data.isdone });
 			revalidatePath('/calendar/ssr');
 			redirect('/calendar/ssr');

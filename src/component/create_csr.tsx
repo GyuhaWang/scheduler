@@ -31,7 +31,6 @@ export default function Create() {
 	};
 	async function handelSubmitTodo() {
 		try {
-			console.log(todo);
 			await createTodo(todo)
 				.then((value) => {
 					addTodo(value);

@@ -11,7 +11,7 @@ import { CsrTag, SsrTag } from './rendering_tag';
 export default function Read({ initialData }: { initialData: Todo[] }) {
 	const { todos, addTodo, removeTodo, toggleTodo, setInitialTodos } =
 		useTodoStore();
-	console.log('reload, todos', todos);
+
 	useEffect(() => {
 		setInitialTodos(initialData);
 	}, []);

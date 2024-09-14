@@ -73,7 +73,7 @@ export class TodoTime {
 	getPlanHeight(): number {
 		const hours = this.getEndtHour() - this.getStartHour();
 		const minutes = this.getEndMinute() / 60 - this.getStartMinute() / 60;
-		console.log(hours + minutes);
+
 		return hours + minutes;
 	}
 	// getStartPosition
