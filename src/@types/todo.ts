@@ -21,7 +21,7 @@ export interface Todo {
 }
 
 export interface TodoModule {
-	id: string;
+	id: number;
 	title: string;
 	content: string | null;
 	date: TodoTime | null;
